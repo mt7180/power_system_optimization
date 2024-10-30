@@ -20,12 +20,15 @@ As a first step, the single period approach of DC-OPF (without storage and varia
 The transmission lines (from node i to node j / where each node (=bus) could stand for one country, for example) are treated as a transport model with controllable dispatch (coupled source & sink), constrained by energy conservation at each node. The absolute flows on these transmission line interconnections cannot exceed the line capacities due to thermal limits.
 
 Sets:   
-$$\begin{align*}
-&N = \text{set of all nodes in the network} \\\\
-&N^i = \text{set of all nodes connected to node i} \\\\
-&G = \text{set of all generators in the network} \\\\
+
+$$
+\begin{align*}
+&N = \text{set of all nodes in the network} \\
+&N^i = \text{set of all nodes connected to node i} \\
+&G = \text{set of all generators in the network} \\
 &G^i = \text{set of all generators at node i}
-\end{align*}$$
+\end{align*}
+$$
   
 Objective Function:
   
