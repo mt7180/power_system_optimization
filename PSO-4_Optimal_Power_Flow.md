@@ -157,21 +157,10 @@ $$
     \sum_{g \in G} P_{i,g,t} + P_{i,t}^{dch} - P_{i,t}^{ch} - Demand_{i,t} = \sum_{l \in L} K_{il} f_{l,t} \quad \leftrightarrow w_t\lambda_{i,t} \quad \forall i, t \quad \text{nodal power balance} \\
     P_{i,g}^{min} \leq P_{i,g,t} \leq P_{i,g}^{max} \quad \forall i, g, t \quad \text{conventional generator limits} \\
     0 \leq P_{i,g,t} \leq \Lambda_{i,g,t} P_{i,g}^{max} \quad \forall i, g, t \quad \text{renewable generator limits} \\
-    soc_{i,s,t} = soc_{i,s,t-1} + (\eta P_{i,t}^{ch} - \frac{P_{i,t}^{dch}} {\eta})\cdot w_t \quad \forall i,s,t \quad \text{storage stage of charge balance}
-\end{align}
-$$
-
-$$
-\begin{align}
+    soc_{i,s,t} = soc_{i,s,t-1} + (\eta P_{i,t}^{ch} - \frac{P_{i,t}^{dch}} {\eta})\cdot w_t \quad \forall i,s,t \quad \text{storage stage of charge balance} \\
     0 \leq soc_{i,t} \leq soc_{i}^{max} \quad \forall i, t \quad \text{storage capacity limits} \\
     0 \leq P_{i,t}^{ch} \leq P_i^{ch,max} \quad \forall i,t \quad \text{storage charging limits} \\
-    0 \leq P_{i,t}^{dch} \leq P_i^{dch,max} \quad \forall i,t \quad \text{storage discharging limits}
-\end{align} 
-$$
-
-
-$$
-\begin{align}
+    0 \leq P_{i,t}^{dch} \leq P_i^{dch,max} \quad \forall i,t \quad \text{storage discharging limits} \\
     |f_{l,t}| \leq F_l^{max}  \quad \forall l, t \quad \text{transmission capacity limits} \\
     \sum_lC_{l,c} f_l x_l = 0  \quad \forall c \quad \text{cycle-based KVL} \\
     \theta_{slack} = 0  \quad  \text{reference bus voltage angle} \\
