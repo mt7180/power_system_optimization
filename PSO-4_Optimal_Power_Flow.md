@@ -172,7 +172,7 @@ $$
 
 $$
 \begin{align}
-    |f_{l,t}| \leq F^{max}_{l}  \quad \forall l, t \quad \text{transmission capacity limits} \\
+    |f_{l,t}| \leq F_l^{max}  \quad \forall l, t \quad \text{transmission capacity limits} \\
     \sum_lC_{l,c} f_l x_l = 0  \quad \forall c \quad \text{cycle-based KVL} \\
     \theta_{slack} = 0  \quad  \text{reference bus voltage angle} \\
     P_{i,g,t} - P_{i,g,t-1} \leq RampUp_{i,g} \quad \forall i,g, t > 0  \quad \text{ramp up limit} \\
