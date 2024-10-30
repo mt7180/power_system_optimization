@@ -20,14 +20,12 @@ As a first step, the single period approach of DC-OPF (without storage and varia
 The transmission lines (from node i to node j / where each node (=bus) could stand for one country, for example) are treated as a transport model with controllable dispatch (coupled source & sink), constrained by energy conservation at each node. The absolute flows on these transmission line interconnections cannot exceed the line capacities due to thermal limits.
 
 Sets:   
-$$
-\begin{align*}
+$$\begin{align*}
 &N = \text{set of all nodes in the network} \\
 &N^i = \text{set of all nodes connected to node i} \\
 &G = \text{set of all generators in the network} \\
 &G^i = \text{set of all generators at node i}
-\end{align*}
-$$
+\end{align*}$$
   
 Objective Function:
   
@@ -158,6 +156,30 @@ $$ \begin{align}
 \end{align}
 $$
 
+
+Parameters:
+
+- $P^{min}_g$ minimum operating bounds for the generator (based on engineering or natural resource constraints)
+- $P^{max}_g$ maximum operating bounds for the generator (based on engineering or natural resource constraints)
+- $Demand_{i,t}$ demand at node i and time t in MW
+- $VarCost_{i,g}$ generator operational/ variable costs in €/MWh
+- $FixedCost_{i,g}$ generator capital/ fixed costs in €/MW
+- $CAP_g$ power capacity of generator g at node i in MW
+- $F^{max}_{l}$ transmission capacity of branch l in MW
+- $w_t$,
+- $C_{l,c}$ , L×(L−N +1) cycle basis matrix
+- $K_{il}$,
+- $\Lambda_{i,g,t}$
+- $\eta$
+
+Variables:
+- $P_g$, generation dispatch by (thermal) unit g in MW
+- $P_{i,s,t}^{ch}$
+- $P_{i,s,t}^{dch}$
+- $soc$
+- $f_{l}$, power flow in branch l at time t in MW
+- $\theta_i$ voltage angle in node i
+- $\lambda_i$, locational marginal price (LMP) in node i
 
 
 
