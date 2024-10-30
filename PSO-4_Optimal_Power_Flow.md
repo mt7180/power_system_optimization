@@ -164,17 +164,17 @@ $$
 $$
 \begin{align}
     0 \leq soc_{i,t} \leq soc_{i}^{max} \quad \forall i, t \quad \text{storage capacity limits} \\
-    0 \leq P_{i,t}^{ch} \leq P^{ch,max}_i \quad \forall i,t \quad \text{storage charging limits} 
-\end{align}
+    0 \leq P_{i,t}^{ch} \leq P^{ch,max}_i \quad \forall i,t \quad \text{storage charging limits} \\
+    0 \leq P_{i,t}^{dch} \leq P^{dch,max}_i \quad \forall i,t \quad \text{storage discharging limits}
+\end{align} 
 $$
 
 $$
-    0 \leq P_{i,t}^{dch} \leq P^{dch,max}_i \quad \forall i,t \quad \text{storage discharging limits} 
+    |f_{l,t}| \leq F^{max}_{l}  \quad \forall l, t \quad \text{transmission capacity limits} 
 $$
 
 $$
 \begin{align}
-    |f_{l,t}| \leq F^{max}_{l}  \quad \forall l, t \quad \text{transmission capacity limits} \\
     \sum_lC_{l,c} f_l x_l = 0  \quad \forall c \quad \text{cycle-based KVL} \\
     \theta_{slack} = 0  \quad  \text{reference bus voltage angle} \\
     P_{i,g,t} - P_{i,g,t-1} \leq RampUp_{i,g} \quad \forall i,g, t > 0  \quad \text{ramp up limit} \\
