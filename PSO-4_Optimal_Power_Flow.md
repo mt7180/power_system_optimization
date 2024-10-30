@@ -37,9 +37,9 @@ $$ \min \sum_{i \in N, g \in G} VarCost_{i,g} \cdot P_{i,g} $$
 subject to:  
 
 $$ \begin{align}
-    \sum_{g \in G^i} P_g - Demand_i = \sum_{j \in N^i} f_{i,j} \quad \leftrightarrow \lambda_i & \quad \forall i \in N \quad &\text{nodal power balance} \\
+    \sum_{g \in G^i} P_{i,g} - Demand_i = \sum_{j \in N^i} f_{i,j} \quad \leftrightarrow \lambda_i & \quad \forall i \in N \quad &\text{nodal power balance} \\
     f_{i,j} = \frac{\theta_i-\theta_j}{X_{i,j}} \quad & \quad \forall i \in N, j \in N^i &\text{power flow from node i to node j} \\
-    P_{g}^{min} \leq P_g \leq P_g^{max} & \quad \forall g \in G & \quad \text{generator limits} \\
+    P_{g}^{min} \leq P_{i,g} \leq P_g^{max} & \quad \forall g \in G & \quad \text{generator limits} \\
     |f_{i,j}| \leq F_{i,j}^{max} & \quad \forall i \in N, j \in N^i & \quad \text{transmission capacity limits} \\
     \theta_{slack} = 0 & & \quad \text{reference bus voltage angle}
 \end{align}
@@ -56,8 +56,8 @@ Parameters:
 - $X_{i,j}$, reactance of line between node i and node j
 
 Variables:
-- $P_g$, generation dispatch by (thermal) unit g in MW
-- $f_{i,j}$, power flow from node i to node j in MW
+- $P_{i,g}$ generation dispatch by (thermal) unit g, in MW
+- $f_{i,j}$ power flow from node i to node j, in MW
 - $\theta_i$ voltage angle in node i
 - $\lambda_i$, locational marginal price (LMP) in node i
 
@@ -77,7 +77,7 @@ But first, we need some theory:
 
 | [Source: Lecture ES by T. Brown](https://nworbmot.org/courses/es-24/es-5-power_flow.pdf)  |   |
 |---|---|
-|$K_{i,l} = \begin{cases} 1 & \text{if edge l starts at node i} \\ −1 & \text{if edge l ends at node i} \\ 0 & \text{otherwise} \end{cases}$ | the node-edge **incidence matrix** $K \in \mathbb{R}^{N×L}$ for a directed graph (every edge has an orientation) with N nodes and L edges |
+|$K_{il} = \begin{cases} 1 & \text{if edge l starts at node i} \\ −1 & \text{if edge l ends at node i} \\ 0 & \text{otherwise} \end{cases}$ | the node-edge **incidence matrix** $K \in \mathbb{R}^{N×L}$ for a directed graph (every edge has an orientation) with N nodes and L edges |
 |$$\sum_{i \in N}{p_i} = 0 \quad$$ | power balance in the whole network of nodes N - all injected power should be consumed in the network, otherwise the network would be in imbalance.|
 |$$p_i = \sum_{l \in L}{K_{il}f_l \quad \forall i \in N}$$ | **Kirchhoff’s Current Law (KCL)** inforces energy conservation at each node (the power imbalance equals what goes out minus what comes in) for the linear setting.|
 |$$\sum_{i \in N}{K_{il}}=0 \quad \forall l \in L$$| for a given edge l, the corresponding columns of the incidence matrix sums up to zero, since every edge starts at some node (+1) and ends at some node (-1)|
@@ -110,8 +110,8 @@ The voltage differece across edge l written in the logic of the incidence matrix
 
 $$\begin{align*}
     f_l &= \frac{\theta_i-\theta_j}{x_l} \\
-        &= \frac{1}{x_l} \sum_i{K_{i,l}\theta_i} \\
-    \Leftrightarrow f_l x_l &= \sum_i{K_{i,l}\theta_i} \quad (2)
+        &= \frac{1}{x_l} \sum_i{K_{il}\theta_i} \\
+    \Leftrightarrow f_l x_l &= \sum_i{K_{il}\theta_i} \quad (2)
 \end{align*}$$
   
 > instead of L different $f_l$ variables, $f_l$ depends only on N voltage angles $\theta_i$  
