@@ -77,7 +77,7 @@ But first, we need some theory:
 
 | [Source: Lecture ES by T. Brown](https://nworbmot.org/courses/es-24/es-5-power_flow.pdf)  |   |
 |---|---|
-|$$K_{i,l} = \begin{cases} 1 & \text{if edge l starts at node i} \\ −1 & \text{if edge l ends at node i} \\ 0 & \text{otherwise} \end{cases}$$ | the node-edge **incidence matrix** $K \in \mathbb{R}^{N×L}$ for a directed graph (every edge has an orientation) with N nodes and L edges |
+|$$\begin{align*}K_{i,l} = \begin{cases} 1 & \text{if edge l starts at node i} \\ −1 & \text{if edge l ends at node i} \\ 0 & \text{otherwise} \end{cases}\end{align*}$$ | the node-edge **incidence matrix** $K \in \mathbb{R}^{N×L}$ for a directed graph (every edge has an orientation) with N nodes and L edges |
 |$$\sum_{i \in N}{p_i} = 0 \quad$$ | power balance in the whole network of nodes N - all injected power should be consumed in the network, otherwise the network would be in imbalance.|
 |$$p_i = \sum_{l \in L}{K_{il}f_l \quad \forall i \in N}$$ | **Kirchhoff’s Current Law (KCL)** inforces energy conservation at each node (the power imbalance equals what goes out minus what comes in) for the linear setting.|
 |$$\sum_{i \in N}{K_{il}}=0 \quad \forall l \in L$$| for a given edge l, the corresponding columns of the incidence matrix sums up to zero, since every edge starts at some node (+1) and ends at some node (-1)|
@@ -152,20 +152,20 @@ $$
 
 subject to:  
 
-$$ \begin{align}
-    \sum_{g \in G} P_{i,g,t} + P_{i,t}^{dch} - P_{i,t}^{ch} - Demand_{i,t} = \sum_{l \in L} K_{il} f_{l,t} \quad \leftrightarrow w_t\lambda_{i,t} & \quad \forall i, t & \quad &\text{nodal power balance} \\
-    P_{i,g}^{min} \leq P_{i,g,t} \leq P_{i,g}^{max} & \quad \forall i, g, t & \quad &\text{conventional generator limits} \\
-    0 \leq P_{i,g,t} \leq \Lambda_{i,g,t} P_{i,g}^{max} & \quad \forall i, g, t & \quad &\text{renewable generator limits} \\
+$$
+\begin{align}
+    \sum_{g \in G} P_{i,g,t} + P_{i,t}^{dch} - P_{i,t}^{ch} - Demand_{i,t} = \sum_{l \in L} K_{il} f_{l,t} \quad \leftrightarrow w_t\lambda_{i,t} & \quad \forall i, t & \quad & \text{nodal power balance} \\
+    P_{i,g}^{min} \leq P_{i,g,t} \leq P_{i,g}^{max} & \quad \forall i, g, t & \quad & \text{conventional generator limits} \\
+    0 \leq P_{i,g,t} \leq \Lambda_{i,g,t} P_{i,g}^{max} & \quad \forall i, g, t & \quad & \text{renewable generator limits} \\
     soc_{i,s,t} = soc_{i,s,t-1} + (\eta P_{i,t}^{ch} - \frac{P_{i,t}^{dch}} {\eta})\cdot w_t & \quad \forall i,s,t & \quad &\text{storage stage of charge balance}\\
-    0 \leq soc_{i,t} \leq soc_{i}^{max} & \quad \forall i, t & \quad &\text{storage capacity limits} & \quad \forall i & \quad &\text{} \\
-    0 \leq P_{i,t}^{ch} \leq P^{ch,max}_i & \quad \forall i,t & \quad &\text{storage chargin limits} \\
-    0 \leq P_{i,t}^{dch} \leq P^{dch,max}_i & \quad \forall i,t & \quad &\text{storage discharging limits} \\
+    0 \leq soc_{i,t} \leq soc_{i}^{max} & \quad \forall i, t & \quad & \text{storage capacity limits} & \quad \forall i & \quad & \text{} \\
+    0 \leq P_{i,t}^{ch} \leq P^{ch,max}_i & \quad \forall i,t & \quad & \text{storage chargin limits} \\
+    0 \leq P_{i,t}^{dch} \leq P^{dch,max}_i & \quad \forall i,t & \quad & \text{storage discharging limits} \\
     |f_{l,t}| \leq F^{max}_{l} & \quad \forall l, t & \quad &\text{transmission capacity limits} \\
     \sum_l{C_{l,c} f_l x_l} = 0 & \quad \forall c & \quad &\text{cycle-based KVL} \\
     \theta_{slack} = 0 & & \quad &\text{reference bus voltage angle} \\
-    P_{i,g,t} - P_{i,g,t-1} \leq RampUp_{i,g} & \quad \forall i,g, t > 0 & \quad &\text{ramp up limit}\\
-    P_{i,g,t-1} - P_{i,g,t} \leq RampDn_{i,g} &  \quad \forall i, g, t > 0 & \quad &\text{ramp down limit}
-    
+    P_{i,g,t} - P_{i,g,t-1} \leq RampUp_{i,g} & \quad \forall i,g, t > 0 & \quad & \text{ramp up limit}\\
+    P_{i,g,t-1} - P_{i,g,t} \leq RampDn_{i,g} &  \quad \forall i, g, t > 0 & \quad & \text{ramp down limit}
 \end{align}
 $$
 
