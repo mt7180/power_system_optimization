@@ -21,9 +21,9 @@ The transmission lines (from node i to node j / where each node (=bus) could sta
 
 Sets:   
 $$\begin{align*}
-&N = \text{set of all nodes in the network} \\
-&N^i = \text{set of all nodes connected to node i} \\
-&G = \text{set of all generators in the network} \\
+&N = \text{set of all nodes in the network} \\\\
+&N^i = \text{set of all nodes connected to node i} \\\\
+&G = \text{set of all generators in the network} \\\\
 &G^i = \text{set of all generators at node i}
 \end{align*}$$
   
