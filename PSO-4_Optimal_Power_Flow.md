@@ -77,21 +77,24 @@ But first, we need some theory:
 
 | [Source: Lecture ES by T. Brown](https://nworbmot.org/courses/es-24/es-5-power_flow.pdf)  |   |
 |---|---|
-|$$K_{i,l} = \begin{cases} 1 & \text{if edge l starts at node i} \\ −1 & \text{if edge l ends at node i} \\ 0 & \text{otherwise} \end{cases}$$ | the node-edge **incidence matrix** $K \in \mathbb{R}^{N×L}$ for a directed graph (every edge has an orientation) with N nodes and L edges |
+|$K_{i,l} = \begin{cases} 1 & \text{if edge l starts at node i} \\ −1 & \text{if edge l ends at node i} \\ 0 & \text{otherwise} \end{cases}$ | the node-edge **incidence matrix** $K \in \mathbb{R}^{N×L}$ for a directed graph (every edge has an orientation) with N nodes and L edges |
 |$$\sum_{i \in N}{p_i} = 0 \quad$$ | power balance in the whole network of nodes N - all injected power should be consumed in the network, otherwise the network would be in imbalance.|
 |$$p_i = \sum_{l \in L}{K_{il}f_l \quad \forall i \in N}$$ | **Kirchhoff’s Current Law (KCL)** inforces energy conservation at each node (the power imbalance equals what goes out minus what comes in) for the linear setting.|
 |$$\sum_{i \in N}{K_{il}}=0 \quad \forall l \in L$$| for a given edge l, the corresponding columns of the incidence matrix sums up to zero, since every edge starts at some node (+1) and ends at some node (-1)|
 |$$\sum_{i \in N}{K_{il}\theta_i} \quad \forall l \in L$$| the voltage difference across edge l |
 |$$KC = 0 $$| Since the flow in a closed cycle is balanced (the flow that enters each node along the edges of the cycle is balanced by the flow that exits)|
-|$$(1)$$ $$\sum_{l \in L}{C_{l,c}}\sum_{i \in N}{K_{il}\theta_i} = 0 \quad \forall c \in C $$ | **Kirchhoff's Voltage Law (KVL)** inforces that the directed sum of voltage differences around each closed cycle add up to zero. <br>The cycles are organized in a **cycle basis matrix** $C_{l,c}$ , where c labels each cycle. |
+|$$\sum_{l \in L}{C_{l,c}}\sum_{i \in N}{K_{il}\theta_i} = 0 \quad \forall c \in C $$ $$(1)$$ | **Kirchhoff's Voltage Law (KVL)** inforces that the directed sum of voltage differences around each closed cycle add up to zero. <br>The cycles are organized in a **cycle basis matrix** $C_{l,c}$ , where c labels each cycle. |
 
 with:
-- N = set of all nodes i in the network
-- L = set of all edges/ branches l in the network
-- C = set of all cycles c in the network
 
+$$
+\begin{align*}
+    &N = \text{set of all nodes i in the network} \\
+    &L = \text{set of all edges/ branches l in the network} \\
+    &C = \text{set of all cycles c in the network}
+\end{align*}
+$$
 
-<br>
 
 The equations for DC circuits (Ohm's Law) and "linear power flow" in AC circuits are analogous:  
 
@@ -154,16 +157,15 @@ subject to:
 
 $$
 \begin{align}
-    \sum_{g \in G} P_{i,g,t} + P_{i,t}^{dch} - P_{i,t}^{ch} - Demand_{i,t} = \sum_{l \in L} K_{il} f_{l,t} \quad \leftrightarrow w_t\lambda_{i,t} &\quad \forall i, t &\quad \text{nodal power balance} \\
+    \begin{split}\sum_{g \in G} P_{i,g,t} + P_{i,t}^{dch} - P_{i,t}^{ch} - Demand_{i,t} \\ = \sum_{l \in L} K_{il} f_{l,t} \quad \leftrightarrow w_t\lambda_{i,t} \end{split} &\quad \forall i, t &\quad \text{nodal power balance} \\
     P_{i,g}^{min} \leq P_{i,g,t} \leq P_{i,g}^{max} &\quad \forall i, g, t &\quad \text{conventional generator limits} \\
     0 \leq P_{i,g,t} \leq \Lambda_{i,g,t} P_{i,g}^{max} &\quad \forall i, g, t &\quad \text{renewable generator limits} \\
-    soc_{i,s,t} = soc_{i,s,t-1} + (\eta P_{i,t}^{ch} - \frac{P_{i,t}^{dch}} {\eta})\cdot w_t &\quad \forall i,s,t &\quad \text{storage stage of charge balance} \\
-    0 \leq soc_{i,t} \leq soc_{i}^{max} &\quad \forall i, t &\quad \text{storage capacity limits} \\
-    0 \leq P_{i,t}^{ch} \leq P_i^{ch,max} &\quad \forall i,t &\quad \text{storage charging limits} \\
-    0 \leq P_{i,t}^{dch} \leq P_i^{dch,max} &\quad \forall i,t &\quad \text{storage discharging limits} \\
+    soc_{i,t} = soc_{i,t-1} + (\eta P_{i,t}^{ch} - \frac{P_{i,t}^{dch}} {\eta})\cdot w_t &\quad \forall i,t &\quad \text{storage stage of charge balance} \\
+    0 \leq soc_{i,t} \leq h_{max} \cdot P_{i}^{storage} &\quad \forall i, t &\quad \text{storage capacity limits} \\
+    0 \leq P_{i,t}^{ch} \leq P_i^{storage} &\quad \forall i,t &\quad \text{storage charging limits} \\
+    0 \leq P_{i,t}^{dch} \leq P_i^{storage} &\quad \forall i,t &\quad \text{storage discharging limits} \\
     |f_{l,t}| \leq F_l^{max}  &\quad \forall l, t &\quad \text{transmission capacity limits} \\
     \sum_lC_{l,c} f_l x_l = 0  &\quad \forall c &\quad \text{cycle-based KVL} \\
-    \theta_{slack} = 0 & &\quad  \text{reference bus voltage angle} \\
     P_{i,g,t} - P_{i,g,t-1} \leq RampUp_{i,g} &\quad \forall i,g, t > 0  &\quad \text{ramp up limit} \\
     P_{i,g,t-1} - P_{i,g,t} \leq RampDn_{i,g} &\quad \forall i, g, t > 0  &\quad \text{ramp down limit}
 \end{align}
@@ -172,27 +174,28 @@ $$
 
 Parameters:
 
-- $P^{min}_g$ minimum operating bounds for the generator (based on engineering or natural resource constraints)
-- $P^{max}_g$ maximum operating bounds for the generator (based on engineering or natural resource constraints)
-- $Demand_{i,t}$ demand at node i and time t in MW
-- $VarCost_{i,g}$ generator operational/ variable costs in €/MWh
-- $FixedCost_{i,g}$ generator capital/ fixed costs in €/MW
-- $CAP_g$ power capacity of generator g at node i in MW
-- $F^{max}_{l}$ transmission capacity of branch l in MW
-- $w_t$,
-- $C_{l,c}$ , L×(L−N +1) cycle basis matrix
-- $K_{il}$,
-- $\Lambda_{i,g,t}$
-- $\eta$
+- $P^{min}_{i,g}$ minimum operating bounds for the generator i,g, in MW (based on engineering or natural resource constraints)
+- $P^{max}_{i,g}$ maximum operating bounds for the generator i,g, in MW (based on engineering or natural resource constraints)
+- $Demand_{i,t}$ demand at node i and time t, in MW
+- $VarCost_{i,g}$ generator operational/ variable costs, in €/MWh
+- $FixedCost_{i,g}$ generator capital/ fixed costs, in €/MW
+- $CAP_g$ power capacity of generator g at node i, in MW
+- $F^{max}_{l}$ transmission capacity of branch l, in MW
+- $w_t$ weighting of time to represent e.g. multiple hours, in h
+- $C_{l,c}$ L $\times$ (L−N +1) cycle basis matrix
+- $K_{il}$ N $\times$ L incidence matrix
+- $\Lambda_{i,g,t}$ Power availability per unit of generator capacity, in MW/MW
+- $\eta$ charging/ discharging efficience
+- $P_{i}^{storage}$ storage nominal power, in MW
+  
 
 Variables:
-- $P_g$, generation dispatch by (thermal) unit g in MW
-- $P_{i,s,t}^{ch}$
-- $P_{i,s,t}^{dch}$
-- $soc$
-- $f_{l}$, power flow in branch l at time t in MW
-- $\theta_i$ voltage angle in node i
-- $\lambda_i$, locational marginal price (LMP) in node i
+- $P_g$, generation dispatch by (thermal) unit g, in MW
+- $P_{i,t}^{ch}$ storage uptake at node i and time t, in MW
+- $P_{i,t}^{dch}$ storage dispatch at node i and time t, in MW
+- $soc_{i,t}$ storage state of charge (energy level) at node i at time t, in MWh
+- $f_{l,t}$ power flow in branch l at time t, in MW
+- $\lambda_{i,t}$ locational marginal price (LMP) in node i at time t, in €/MWh
 
 
 
