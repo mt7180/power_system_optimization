@@ -1,0 +1,6 @@
+Resource,Pmax,Pmin,is_variable,CF,VarOM,RampUp,RampDn,FuelCost,HeatRate,Capex
+Biomass, 50, 0.7, 0, 1, 5, 0.2, 0.2, 1, 12.76, 1_000_000
+Wind onshore, 1000, 0, 1, 0.3, 0,1, 1, 0,, 1_000_000
+Wind offshore, 200, 0, 1, 0.7, 0,1, 1, 0,, 1_000_000
+Solar, 2000, 0, 1, 0.1, 0, 1, 1, 0,, 1_000_000
+Gas_Turbine, 1500, 0.7, 0, 1, 10, 0.2, 0.2, 3, 9.1, 1_000_000
