@@ -161,8 +161,8 @@ $$
     0 \leq soc_{i,t} \leq soc_{i}^{max} & \quad \forall i, t & \quad & \text{storage capacity limits} \\
     0 \leq P_{i,t}^{ch} \leq P^{ch,max}_i & \quad \forall i,t & \quad & \text{storage chargin limits} \\
     0 \leq P_{i,t}^{dch} \leq P^{dch,max}_i & \quad \forall i,t & \quad & \text{storage discharging limits} \\
-    |f_{l,t}| \leq F^{max}_{l} & \quad \forall l, t & \quad &\text{transmission capacity limits} \\
-    \sum_l{C_{l,c} f_l x_l} = 0 & \quad \forall c & \quad &\text{cycle-based KVL} 
+    |f_{l,t}| \leq F^{max}_{l} & \quad \forall l, t & \quad & \text{transmission capacity limits} \\
+    \sum_l{C_{l,c} f_l x_l} = 0 & \quad \forall c & \quad & \text{cycle-based KVL} 
 \end{align*}
 $$
 
