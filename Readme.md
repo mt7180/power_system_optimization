@@ -14,13 +14,13 @@ A project to learn about power system modelling and power system optimization wi
 - [Dynamic Economic Dispatch with curtailment and storage](PSO-2_DED_with_curtailment_and_storage.ipynb)
 - [Capacity Expansion](PSO-3_Capacity_Expansion.ipynb)
 - [Optimal Power Flow Theory](PSO-4_Optimal_Power_Flow.md)
-- [Optimal Power Flow Example with PyPSA](PSO-4_Optimal_Power_Flow.ipynb)
+- Optimal Power Flow Example with PyPSA (coming soon)
 
   
 <br>
 
  
-> Learning Resources:  
+> Learning Resources:
 > - [**Energy Systems**](https://nworbmot.org/courses/es-24/) by Prof. Tom Brown (TU Berlin)
 > - Course [**"Power System Optimization in Pyomo I"**](https://www.udemy.com/course/power-system-optimization-in-pyomo-p1/?couponCode=KEEPLEARNING):  
  _ED, DED, Battery model, Wind, Sensitivity Analsysis, and Visualization modeling in Pyomo_  
