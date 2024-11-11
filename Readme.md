@@ -14,7 +14,7 @@ A project to learn about power system modelling and power system optimization wi
 - [Dynamic Economic Dispatch with curtailment and storage](PSO-2_DED_with_curtailment_and_storage.ipynb)
 - [Capacity Expansion](PSO-3_Capacity_Expansion.ipynb)
 - [Optimal Power Flow Theory](PSO-4_Optimal_Power_Flow.md)
-- Optimal Power Flow Example with PyPSA (coming soon)
+- [Optimal Power Flow Example with PyPSA](PSO-4_Optimal_Power_Flow.ipynb)
 
   
 <br>
